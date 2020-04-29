@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
   entry: {
     virtualDom: './src/virtualDom.js',
-    // virtualDom2: './src/virtualDom2.js'
+    vdom1: './src/vdom1.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -13,10 +13,10 @@ module.exports = {
       filename: "virtualDom.html",
       chunks: ['virtualDom']
     }),
-    // new HtmlWebpackPlugin({
-    //   title: "virtual-dom - 2.2.1",
-    //   filename: "virtualDom2.html",
-    //   chunks : ['virtualDom2']
-    // }),
+    new HtmlWebpackPlugin({
+      title: "vdom1",
+      filename: "vdom1.html",
+      chunks: ['vdom1']
+    }),
   ]
 };

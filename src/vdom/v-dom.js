@@ -1,5 +1,10 @@
-export function hyperscript(nodeName, attributes, ...children) {
+export function h(nodeName, attributes, ...children) {
   return {nodeName, attributes, children};
+}
+
+export const renderComponent = (component) => {
+  let rendered = component.render(component.props, component.state);
+  component.base = diff(component.base, rendered);
 }
 
 export function renderNode(vnode) {
@@ -13,7 +18,7 @@ export function renderNode(vnode) {
     for (const key in attributes) {
       el.setAttribute(key, attributes[key]);
     }
-  } else if (typeof nodeName === 'function') { // ES6 class for function contructors.
+  } else if (typeof nodeName === 'function') { // ES6 class/function constructors.
     const component = new nodeName(attributes);
     el = renderNode(component.render(component.props, component.state))
     
@@ -26,13 +31,43 @@ export function renderNode(vnode) {
   return el;
 }
 
-export const renderComponent = (component, parent) => {
-  const oldBase = component.base;
-  component.base = renderNode(component.render(component.props, component.state));
-  
-  if (parent) {
-    parent.appendChild(component.base);
+const diff = (dom, vnode, parent) => {
+  if (dom) {
+    if (typeof vnode === 'string') {
+      dom.nodeValue = vnode;
+      
+      return dom;
+    }
+    
+    if (typeof vnode.nodeName === 'function') {
+      const component = new vnode.nodeName(vnode.attributes);
+      const rendered = component.render(component.props, component.state);
+      
+      diff(dom, rendered);
+      return dom;
+    }
+    
+    // Naive check for number of children of vNode and dom
+    if (vnode.children.length !== dom.childNodes.length) {
+      dom.appendChild(
+        // render only the last child
+        renderNode(vnode.children[vnode.children.length - 1])
+      )
+    }
+    
+    // run diffing for children
+    for (let i = 0; i < vnode.children.length; i++) {
+      diff(dom.childNodes[i], vnode.children[i]);
+    }
+    
+    return dom;
   } else {
-    oldBase.parentNode.replaceChild(component.base, oldBase);
+    const newDom = renderNode(vnode);
+    parent.appendChild(newDom);
+    return newDom;
   }
+}
+
+export const render = (vNode, parent) => {
+  diff(undefined, vNode, parent);
 }

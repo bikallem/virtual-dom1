@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
+  devtool: "source-map",
   mode: 'development',
   entry: {
     virtualDom: './src/virtualDom.js',

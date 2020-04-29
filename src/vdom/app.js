@@ -1,9 +1,5 @@
-import {hyperscript as h, renderComponent} from 'Vdom/v-dom'
+import {h, render} from 'Vdom/v-dom'
 import Component from "Vdom/component";
-
-const getRandomItemFromArray = (list) => {
-  return list[Math.round(Math.random() * (list.length - 1))];
-};
 
 class App extends Component {
   render() {
@@ -13,6 +9,11 @@ class App extends Component {
     )
   }
 }
+
+const getRandomItemFromArray = (list) => {
+  return list[Math.round(Math.random() * (list.length - 1))];
+};
+
 
 class People extends Component {
   constructor(props) {
@@ -29,9 +30,9 @@ class People extends Component {
   
   render(props, state) {
     return h('ul', null,
-      ...state.list.map(item => h('hi', null, item))
+      ...state.list.map(item => h('li', null, item))
     );
   }
 }
 
-renderComponent(new App(), document.querySelector('#root'));
+render(h(App), document.querySelector('#root'));

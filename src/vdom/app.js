@@ -1,5 +1,5 @@
-import h from './hyperscript'
-import renderNode from './v-dom';
+import h from 'Vdom/hyperscript'
+import renderNode from 'Vdom/v-dom';
 
 const getRandomItemFromArray = (list) => {
   return list[Math.round(Math.random() * (list.length - 1))];

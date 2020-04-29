@@ -1,22 +1,28 @@
-// const path = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: {
     virtualDom: './src/virtualDom.js',
-    vdom1: './src/vdom1.js'
+    vdom: './src/vdom/app.js'
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "virtual-dom - 2.2.1",
       filename: "virtualDom.html",
       chunks: ['virtualDom']
     }),
     new HtmlWebpackPlugin({
-      title: "vdom1",
-      filename: "vdom1.html",
-      chunks: ['vdom1']
+      title: "simple vDOM",
+      filename: "vdom.html",
+      chunks: ['vdom']
     }),
   ]
 };

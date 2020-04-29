@@ -1,13 +1,13 @@
-import { renderComponent } from "Vdom/v-dom";
+import { renderComponent } from "Vdom/v-dom"
 
 export default class Component {
   constructor(props) {
-    this.props = props;
-    this.state = {};
+    this.props = props
+    this.state = {}
   }
 
   setState(state) {
-    this.state = Object.assign({}, state);
-    renderComponent(this);
+    this.state = Object.assign({}, state)
+    renderComponent(this)
   }
 }

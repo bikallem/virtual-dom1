@@ -1,2 +1,2 @@
 # virtual-dom1
-Virtual DOM investigation
+Project to understand various Virtual DOM implementation libraries as well as creating one yourself.

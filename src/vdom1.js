@@ -18,8 +18,29 @@ function hyperscript(nodeName, attrs, ...children) {
 
 const h = hyperscript;
 
-const App = () => {
-  return h('h1', null, 'Hello, vDOM');
+const App = (props) => {
+  const {list} = props;
+  
+  return h('div', {class: 'app'},
+    h('h1', null, 'Simple vDOM'),
+    h('ul', null,
+      ...list.map(item => h('li', null, item))
+    )
+  );
 };
 
-document.body.appendChild(App());
+let currentApp;
+const render = (state) => {
+  const newApp = App(state);
+  currentApp
+    ? document.body.replaceChild(newApp, currentApp)
+    : document.body.appendChild(newApp);
+  currentApp = newApp;
+};
+
+const state = {
+  list: ['a', 'b', 'c']
+};
+
+render(state);
+

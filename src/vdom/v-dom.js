@@ -1,24 +1,16 @@
-export function h(
-  nodeName,
-  attributes,
-  ...children
-) {
+export function h(nodeName, attributes, ...children) {
   return { nodeName, attributes, children }
 }
 
 export const renderComponent = (component) => {
-  let rendered = component.render(
-    component.props,
-    component.state
-  )
+  let rendered = component.render(component.props, component.state)
   component.base = patch(component.base, rendered)
 }
 
 export function renderNode(vnode) {
   const { nodeName, attributes, children } = vnode
 
-  if (vnode.split)
-    return document.createTextNode(vnode)
+  if (vnode.split) return document.createTextNode(vnode)
   let el
 
   if (typeof nodeName === "string") {
@@ -30,20 +22,13 @@ export function renderNode(vnode) {
   } else if (typeof nodeName === "function") {
     // ES6 class/function constructors.
     const component = new nodeName(attributes)
-    el = renderNode(
-      component.render(
-        component.props,
-        component.state
-      )
-    )
+    el = renderNode(component.render(component.props, component.state))
 
     // Save DOM reference to `base` field as in `renderComponent`
     component.base = el
   }
 
-  ;(children || []).forEach((child) =>
-    el.appendChild(renderNode(child))
-  )
+  ;(children || []).forEach((child) => el.appendChild(renderNode(child)))
 
   return el
 }
@@ -57,37 +42,23 @@ const patch = (dom, vnode, parent) => {
     }
 
     if (typeof vnode.nodeName === "function") {
-      const component = new vnode.nodeName(
-        vnode.attributes
-      )
-      const rendered = component.render(
-        component.props,
-        component.state
-      )
+      const component = new vnode.nodeName(vnode.attributes)
+      const rendered = component.render(component.props, component.state)
 
       patch(dom, rendered)
       return dom
     }
 
     // Naive check for number of children of vNode and dom
-    if (
-      vnode.children.length !==
-      dom.childNodes.length
-    ) {
+    if (vnode.children.length !== dom.childNodes.length) {
       dom.appendChild(
         // render only the last child
-        renderNode(
-          vnode.children[vnode.children.length - 1]
-        )
+        renderNode(vnode.children[vnode.children.length - 1])
       )
     }
 
     // run diffing for children
-    for (
-      let i = 0;
-      i < vnode.children.length;
-      i++
-    ) {
+    for (let i = 0; i < vnode.children.length; i++) {
       patch(dom.childNodes[i], vnode.children[i])
     }
 

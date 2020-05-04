@@ -10,6 +10,7 @@
     "fmt": "prettier . --write"
   },
   "dependencies": {
+    "snabbdom": "^0.7.4",
     "virtual-dom": "^2.1.1"
   },
   "devDependencies": {

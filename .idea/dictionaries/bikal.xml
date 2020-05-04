@@ -2,6 +2,7 @@
   <dictionary name="bikal">
     <words>
       <w>hyperscript</w>
+      <w>snabbdom</w>
       <w>vdom</w>
     </words>
   </dictionary>

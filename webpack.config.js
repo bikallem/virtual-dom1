@@ -6,8 +6,8 @@ module.exports = {
   devtool: "source-map",
   mode: "development",
   entry: {
-    virtualDom: "./src/virtualDom.js",
-    vdom: "./src/vdom/app.js",
+    virtualDom: "./src/virtual-dom/virtualDom.js",
+    myVdom: "./src/myVdom/app.js",
   },
   output: {
     filename: "[name].bundle.js",
@@ -15,7 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      Vdom: path.resolve(__dirname, "src/vdom/"),
+      MyVdom: path.resolve(__dirname, "src/myVdom/"),
     },
   },
   plugins: [
@@ -26,8 +26,8 @@ module.exports = {
       chunks: ["virtualDom"],
     }),
     new HtmlWebpackPlugin({
-      title: "simple vDOM",
-      filename: "vdom.html",
+      title: "My vDOM",
+      filename: "myVdom.html",
       chunks: ["vdom"],
     }),
   ],

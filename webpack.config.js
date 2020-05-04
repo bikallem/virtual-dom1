@@ -28,7 +28,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "My vDOM",
       filename: "myVdom.html",
-      chunks: ["vdom"],
+      chunks: ["myVdom"],
     }),
   ],
 }

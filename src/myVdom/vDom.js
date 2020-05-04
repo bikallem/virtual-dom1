@@ -7,6 +7,7 @@ export const renderComponent = (component) => {
   component.base = patch(component.base, rendered)
 }
 
+/// Renders vdom to browser DOM
 export function renderNode(vnode) {
   const { nodeName, attributes, children } = vnode
 
@@ -33,6 +34,8 @@ export function renderNode(vnode) {
   return el
 }
 
+/// Diffs vdom with DOM and patches the diff.
+/// Also known as update or sync function.
 const patch = (dom, vnode, parent) => {
   if (dom) {
     if (typeof vnode === "string") {

@@ -1,4 +1,4 @@
-import { h, render } from "MyVdom/v-dom"
+import { h, render } from "MyVdom/vDom"
 import Component from "MyVdom/component"
 
 class App extends Component {

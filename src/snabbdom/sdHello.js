@@ -20,11 +20,8 @@ function view(name) {
 }
 
 function update(event) {
-  console.log("input changed.")
   const newVnode = view(event.target.value)
   oldVnode = patch(oldVnode, newVnode)
 }
 
-let oldVnode = document.getElementById('root')
-
-oldVnode = patch(oldVnode, view(''))
+let oldVnode = patch(document.getElementById('root'), view(''))

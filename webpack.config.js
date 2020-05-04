@@ -8,7 +8,8 @@ module.exports = {
   entry: {
     virtualDom: "./src/virtual-dom/virtualDom.js",
     myVdom: "./src/myVdom/app.js",
-    sdHelloWorld: "./src/snabbdom/sdHelloWorld.js"
+    sdHelloWorld: "./src/snabbdom/sdHelloWorld.js",
+    sdHello: "./src/snabbdom/sdHello.js"
   },
   output: {
     filename: "[name].bundle.js",
@@ -35,6 +36,11 @@ module.exports = {
       title: "Snabbdom HelloWorld",
       filename: "sdHelloWorld.html",
       chunks: ["sdHelloWorld"]
+    }),
+    new HtmlWebpackPlugin ({
+      title: "Snabbdom Hello",
+      filename: "sdHello.html",
+      chunks: ["sdHello"]
     }),
   ],
 }
